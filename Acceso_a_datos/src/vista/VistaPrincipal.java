@@ -135,7 +135,7 @@ public class VistaPrincipal extends JFrame {
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//controlador.eliminarPersona();
+				controlador.eliminarUno();
 			}
 		});
 		

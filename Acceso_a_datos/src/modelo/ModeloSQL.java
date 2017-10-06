@@ -91,8 +91,8 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 			rs = st.executeQuery(query);
 			Alumnos alumno;
 			while (rs.next()) {
-				alumno = new Alumnos(rs.getInt("id"), rs.getString("DNI"), rs.getString("NOMBRE"),
-						rs.getString("APELLIDOS"), rs.getInt("TELEFONOS"), rs.getString("NACIONALIDAD"));
+				alumno = new Alumnos(rs.getInt("cod"), rs.getString("DNI"), rs.getString("NOMBRE"),
+						rs.getString("APELLIDO"), rs.getInt("TELEFONO"), rs.getString("NACIONALIDAD"));
 				arrAlumnos.add(alumno);
 			}
 		} catch (Exception e) {
@@ -109,7 +109,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 		Connection con = getConnection();
 		PreparedStatement ps;
 
-		String query = "INSERT INTO `alumnos` (`dni`, `nombre`, `apellidos`, `telefonos`, `nacionalidad`) VALUES (?,?,?,?,?)";
+		String query = "INSERT INTO `alumnos` (`dni`, `nombre`, `apellido`, `telefono`, `nacionalidad`) VALUES (?,?,?,?,?)";
 		try {
 			ps = con.prepareStatement(query);
 			ps.setString(1, alumno.getDni().toLowerCase());
@@ -133,7 +133,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 	}
 
 	@Override
-	public void borrar() {
+	public void borrarUno(int cod) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -180,7 +180,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 		Connection con = getConnection();
 		int r = 0;
 
-		String query = "UPDATE alumnos SET NOMBRE = ?, APELLIDOS = ?,  TELEFONOS = ?, NACIONALIDAD = ? WHERE alumnos.DNI = '"+ dni+"'";
+		String query = "UPDATE alumnos SET NOMBRE = ?, APELLIDO = ?,  TELEFONO = ?, NACIONALIDAD = ? WHERE alumnos.DNI = '"+ dni+"'";
 		
 		
 		PreparedStatement pstmt;
@@ -188,10 +188,10 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 
 		try {
 			pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, nombre);
-			pstmt.setString(2, apellidos);
+			pstmt.setString(1, nombre.toLowerCase());
+			pstmt.setString(2, apellidos.toLowerCase());
 			pstmt.setInt(3, telefono);
-			pstmt.setString(4, nacionalidad);
+			pstmt.setString(4, nacionalidad.toLowerCase());
 
 			
 			r = pstmt.executeUpdate();

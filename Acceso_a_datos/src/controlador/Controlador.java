@@ -97,6 +97,12 @@ public class Controlador {
 		modeloPrincipal.borrarTodos();
 		
 	}
+	
+	public void eliminarUno() {
+		int cod = Integer.parseInt((String) vistaPrincipal.getTabla().getValueAt(vistaPrincipal.getTabla().getSelectedRow(),1));
+		modeloPrincipal.borrarUno(cod);
+		
+	}
 
 	
 }

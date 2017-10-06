@@ -16,6 +16,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 	ArrayList<Alumnos> list;
 	File file;
+	private int nAlumnos = 0;
 
 	@Override
 	public ArrayList<Alumnos> recogerDatos() {
@@ -36,6 +37,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 				alumno = new Alumnos(Integer.parseInt(datosaux[0]), datosaux[1], datosaux[2], datosaux[3],
 						Integer.parseInt(datosaux[4]), datosaux[5]);
 				list.add(alumno);
+				nAlumnos = Integer.parseInt(datosaux[0]);
 
 			}
 		} catch (FileNotFoundException e) {
@@ -87,14 +89,52 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 	@Override
 	public void insertar(Alumnos alumno) {
-		// TODO Auto-generated method stub
+		
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+		try {
+			fichero = new FileWriter("conf/datos.txt",true);
+			pw = new PrintWriter(fichero);
+
+				pw.println((nAlumnos+1) + "," + alumno.getDni() + "," + alumno.getNombre() + ","
+						+ alumno.getApellido() + "," + alumno.getTelefono() + ","
+						+ alumno.getNacionalidad());
+				nAlumnos++;
+				System.out.println(nAlumnos);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			if (fichero != null) {
+				pw.close();
+				fichero.close();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see modelo.ModeloPrincipal#borrarUno(int)
+	 * trato de coger el array que deja recogerDatos() y con ese array hacer un .remove por codigo
+	 */
 	@Override
-	public void borrar() {
-		// TODO Auto-generated method stub
-
+	public void borrarUno(int cod) {
+		//recogerDatos();
+		System.out.println("size----" + list.size());
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).getCod()==cod){
+				list.remove(i);
+				System.out.println("lista-----" +list.get(i).getCod());
+			}
+		}
+		copiarTodos(list);
 	}
 
 	@Override

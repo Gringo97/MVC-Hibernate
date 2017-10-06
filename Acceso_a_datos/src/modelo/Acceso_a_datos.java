@@ -12,7 +12,7 @@ public interface Acceso_a_datos {
 	
 	public void insertar(Alumnos alumno);
 	
-	public void borrar();
+	public void borrarUno(int cod);
 	
 	public void borrarTodo();
 	

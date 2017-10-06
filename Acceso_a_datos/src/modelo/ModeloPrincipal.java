@@ -86,6 +86,12 @@ public class ModeloPrincipal {
 		modeloDatos.borrarTodo();
 	
 	}
+
+	public void borrarUno(int cod) {
+		modeloDatos.borrarUno(cod);
+		vistaPrincipal.crearTabla();
+		
+	}
 	
 
 	
