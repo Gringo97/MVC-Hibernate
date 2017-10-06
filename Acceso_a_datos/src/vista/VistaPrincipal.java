@@ -175,7 +175,7 @@ public class VistaPrincipal extends JFrame {
 		
 		JLabel lblBuscadorDni = new JLabel("Buscador DNI:");
 		
-		JButton btnSubirFicher = new JButton("Subir Ficher");
+		JButton btnSubirFicher = new JButton("Exportar a");
 		btnSubirFicher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tipoReceptor  = controlador.tipoAcceso();

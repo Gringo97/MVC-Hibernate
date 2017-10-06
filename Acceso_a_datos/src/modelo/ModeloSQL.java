@@ -150,7 +150,10 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 
 	@Override
 	public void  copiarTodos(ArrayList<Alumnos> arrLista){
-		
+		for (int i = 0; i < arrLista.size(); i++) {
+			this.insertar(arrLista.get(i));
+
+		}
 		
 		
 		
