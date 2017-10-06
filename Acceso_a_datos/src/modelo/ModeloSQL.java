@@ -136,7 +136,25 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 
 	@Override
 	public void borrarTodo() {
-		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		PreparedStatement ps;
+
+		String query = "DELETE FROM `alumnos` ";
+		try {
+			ps = con.prepareStatement(query);
+
+			if (ps.executeUpdate() == 1) {
+
+			
+
+				JOptionPane.showMessageDialog(null, "Informaci�n almacenada satisfactoriamente");
+			} else {
+				JOptionPane.showMessageDialog(null, "La informaci�n no pudo ser almacenada");
+			}
+		} catch (Exception ex) {
+			// TODO: handle exception
+			ex.printStackTrace();
+		}
 		
 	}
 

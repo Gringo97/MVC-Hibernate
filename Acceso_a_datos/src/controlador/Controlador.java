@@ -41,6 +41,7 @@ public class Controlador {
 	
 	public void tipoExportar(String tipoReceptor){
 		modeloPrincipal.tipoExportar(tipoReceptor);
+		
 		modeloPrincipal.copiarTodos();
 	}
 	

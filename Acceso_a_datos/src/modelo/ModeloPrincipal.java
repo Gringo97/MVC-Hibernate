@@ -65,6 +65,7 @@ public class ModeloPrincipal {
 	public void copiarTodos() {
 		ArrayList<Alumnos> arrLista;
 		arrLista = modeloDatos.recogerDatos();
+		modeloDatosAux.borrarTodo();
 		modeloDatosAux.copiarTodos(arrLista);		
 		
 		
