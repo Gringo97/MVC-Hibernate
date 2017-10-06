@@ -99,14 +99,24 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 	@Override
 	public void borrarTodo() {
-		// TODO Auto-generated method stub
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(file);
+			writer.print("");
+			writer.close();
 
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-
 	@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
-
+	public void actualizar(String dni,String nombre,String apellidos, int telefono,String nacionalidad) {
+		
 	}
+
+
+	
 
 }

@@ -14,6 +14,7 @@ public class Controlador {
 	private ModeloPrincipal modeloPrincipal;
 	private VistaPrincipal vistaPrincipal;
 
+
 	public String tipoAcceso() {
 		String resp;
 		String[] tipos = { "SQL", "Ficheros", };
@@ -76,10 +77,26 @@ public class Controlador {
 		
 		
 	}
+	
+	public void actualizarAlumno(){
+		String dato=String.valueOf(vistaPrincipal.getTabla().getValueAt(vistaPrincipal.getTabla().getSelectedRow(),1));
+		modeloPrincipal.actualizar(dato,vistaPrincipal.getTxtNombreMod(),vistaPrincipal.getTxtApellidoMod(),Integer.parseInt(vistaPrincipal.getTxtTelefonoMod()),vistaPrincipal.getTxtNacionalidadMod());
+		
+	}
+	
+	
 
 	public void nuevoAlumno() {
+		Alumnos alumno;
+		alumno = new Alumnos(vistaPrincipal.getTxtDni(),vistaPrincipal.getTxtNombre(),vistaPrincipal.getTxtApellido(),Integer.parseInt(vistaPrincipal.getTxtTelefono()),vistaPrincipal.getTxtNacionalidad());
 		
+		modeloPrincipal.anadirAlumno(alumno);
+	}
+
+	public void eliminarTodos() {
+		modeloPrincipal.borrarTodos();
 		
 	}
 
+	
 }

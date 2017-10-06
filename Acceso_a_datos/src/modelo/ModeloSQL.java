@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import entidades.Alumnos;
+import vista.VistaPrincipal;
 
 public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 		String url;
@@ -119,6 +121,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 			if (ps.executeUpdate() == 1) {
 
 				JOptionPane.showMessageDialog(null, "Informaci�n almacenada satisfactoriamente");
+		
 			} else {
 				JOptionPane.showMessageDialog(null, "La informaci�n no pudo ser almacenada");
 			}
@@ -126,6 +129,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 			// TODO: handle exception
 			ex.printStackTrace();
 		}
+		
 	}
 
 	@Override
@@ -158,12 +162,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 		
 	}
 
-	@Override
-	public void actualizar() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 
 
 	@Override
@@ -176,8 +175,37 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 		
 		
 	}
-	
-	
+	@Override
+	public void actualizar(String dni,String nombre,String apellidos, int telefono,String nacionalidad) {
+		Connection con = getConnection();
+		int r = 0;
+
+		String query = "UPDATE alumnos SET NOMBRE = ?, APELLIDOS = ?,  TELEFONOS = ?, NACIONALIDAD = ? WHERE alumnos.DNI = '"+ dni+"'";
+		
+		
+		PreparedStatement pstmt;
+		int last_inserted_id = -1;
+
+		try {
+			pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, nombre);
+			pstmt.setString(2, apellidos);
+			pstmt.setInt(3, telefono);
+			pstmt.setString(4, nacionalidad);
+
+			
+			r = pstmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
+	}
+
+
+
 	
 
 

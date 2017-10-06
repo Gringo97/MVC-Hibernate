@@ -21,6 +21,16 @@ public class Alumnos {
 		this.telefono = telefono;
 		this.nacionalidad = nacionalidad;
 	}
+public Alumnos( String dni, String nombre, String apellido, int telefono, String nacionalidad) {
+		
+
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.nacionalidad = nacionalidad;
+	}
+
 
 
 

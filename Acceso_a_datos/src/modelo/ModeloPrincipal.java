@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.ArrayList;
 
+import javax.swing.JTextField;
+
 import entidades.Alumnos;
 import vista.VistaPrincipal;
 
@@ -52,10 +54,7 @@ public class ModeloPrincipal {
 
 	}
 
-	public void anadirAlumno() {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	public ArrayList<Alumnos> recogerDatos2() {
 		return modeloDatosAux.recogerDatos();
@@ -65,10 +64,29 @@ public class ModeloPrincipal {
 	public void copiarTodos() {
 		ArrayList<Alumnos> arrLista;
 		arrLista = modeloDatos.recogerDatos();
-		modeloDatosAux.borrarTodo();
+		if(this.modeloDatos.getClass() == ModeloFicheros.class ) {
+			modeloDatosAux.borrarTodo();
+		}
 		modeloDatosAux.copiarTodos(arrLista);		
 		
 		
 	}
 
+	public void anadirAlumno(Alumnos nuevo) {
+		modeloDatos.insertar(nuevo);
+		vistaPrincipal.crearTabla();
+		
+	}
+	public void actualizar(String dni, String nombre, String apellido, int telefono, String nacionalidad){
+		modeloDatos.actualizar(dni,nombre,apellido,telefono,nacionalidad);
+		vistaPrincipal.crearTabla();
+	}
+
+	public void borrarTodos() {
+		modeloDatos.borrarTodo();
+	
+	}
+	
+
+	
 }

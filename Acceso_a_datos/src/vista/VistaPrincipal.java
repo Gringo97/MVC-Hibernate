@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Array;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -121,6 +122,12 @@ public class VistaPrincipal extends JFrame {
 		txtNacionalidadMod.setColumns(10);
 
 		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				controlador.actualizarAlumno();
+			}
+		});
 
 		JSeparator separator = new JSeparator();
 
@@ -143,7 +150,7 @@ public class VistaPrincipal extends JFrame {
 		btnEliminarTodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//controlador.eliminarTodos();
+				controlador.eliminarTodos();
 			}
 		});
 		
@@ -274,10 +281,14 @@ public class VistaPrincipal extends JFrame {
 
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//controlador.mostrarDatos();
-			}
+		    @Override
+		    public void mouseClicked(final MouseEvent e) {
+		       txtNombreMod.setText((String) table.getValueAt(table.getSelectedRow(), 2));
+		       txtApellidoMod.setText((String) table.getValueAt(table.getSelectedRow(), 3));
+		       txtTelefonoMod.setText((String) table.getValueAt(table.getSelectedRow(), 4));
+		       txtNacionalidadMod.setText((String) table.getValueAt(table.getSelectedRow(), 5));
+		       
+		    }
 		});
 		
 	
@@ -285,6 +296,9 @@ public class VistaPrincipal extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
+	public JTable getTabla() {
+		return table;
+	}
 
 
 	public void onLoadTable() {
@@ -335,36 +349,43 @@ public class VistaPrincipal extends JFrame {
 		return txtNacionalidad.getText();
 	}
 
-	public JTextField getTxtNombreMod() {
-		return txtNombreMod;
+	public String getTxtNombreMod() {
+		return txtNombreMod.getText();
 	}
 
 	public void setTxtNombreMod(JTextField txtNombreMod) {
 		this.txtNombreMod = txtNombreMod;
 	}
 
-	public JTextField getTxtApellidoMod() {
-		return txtApellidoMod;
+	public String getTxtApellidoMod() {
+		return txtApellidoMod.getText();
 	}
 
 	public void setTxtApellidoMod(JTextField txtApellidoMod) {
 		this.txtApellidoMod = txtApellidoMod;
 	}
 
-	public JTextField getTxtTelefonoMod() {
-		return txtTelefonoMod;
+	public String getTxtTelefonoMod() {
+		return txtTelefonoMod.getText();
 	}
 
 	public void setTxtTelefonoMod(JTextField txtTelefonoMod) {
 		this.txtTelefonoMod = txtTelefonoMod;
 	}
 
-	public JTextField getTxtNacionalidadMod() {
-		return txtNacionalidadMod;
+	public String getTxtNacionalidadMod() {
+		return txtNacionalidadMod.getText();
 	}
 
 	public void setTxtNacionalidadMod(JTextField txtNacionalidadMod) {
 		this.txtNacionalidadMod = txtNacionalidadMod;
+	}
+
+
+
+	public void crearTabla() {
+		controlador.crearTabla();
+		
 	}
 
 

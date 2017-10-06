@@ -16,8 +16,10 @@ public interface Acceso_a_datos {
 	
 	public void borrarTodo();
 	
-	public void actualizar();
+	public void actualizar(String dni, String nombre, String apellido, int telefono, String nacionalidad);
+	
 	public void  copiarTodos(ArrayList<Alumnos> arrLista);
+
 	
 	
 		
