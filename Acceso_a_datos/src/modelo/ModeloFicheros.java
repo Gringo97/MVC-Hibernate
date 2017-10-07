@@ -152,6 +152,12 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 	}
 	@Override
 	public void actualizar(String dni,String nombre,String apellidos, int telefono,String nacionalidad) {
+		/*
+		 * borrarUno(cod);
+		 * insertar(alumno);
+		 * el alumno de insertar debe ser el actualizar
+		 * Creo que teniendo los metodos borarUno() e insertar() podemos reutilizarlos
+		 */
 		
 	}
 
