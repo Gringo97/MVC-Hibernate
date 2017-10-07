@@ -99,7 +99,8 @@ public class Controlador {
 	}
 	
 	public void eliminarUno() {
-		int cod = Integer.parseInt((String) vistaPrincipal.getTabla().getValueAt(vistaPrincipal.getTabla().getSelectedRow(),1));
+		int cod = Integer.parseInt((String) vistaPrincipal.getTabla().getValueAt(vistaPrincipal.getTabla().getSelectedRow(),0));
+		System.out.println("cod de tabl======>" + cod);
 		modeloPrincipal.borrarUno(cod);
 		
 	}

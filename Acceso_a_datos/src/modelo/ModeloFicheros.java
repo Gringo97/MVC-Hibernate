@@ -131,7 +131,6 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 		for (int i = 0; i < list.size(); i++) {
 			if(list.get(i).getCod()==cod){
 				list.remove(i);
-				System.out.println("lista-----" +list.get(i).getCod());
 			}
 		}
 		copiarTodos(list);
