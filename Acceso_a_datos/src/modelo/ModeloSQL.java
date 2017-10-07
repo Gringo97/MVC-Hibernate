@@ -134,7 +134,24 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 
 	@Override
 	public void borrarUno(int cod) {
-		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		PreparedStatement ps;
+
+		String query = "DELETE FROM `alumnos` WHERE cod=" + cod;
+		try {
+
+			ps = con.prepareStatement(query);
+			if (ps.executeUpdate() == 1) {
+
+				JOptionPane.showMessageDialog(null, "Informaci�n borrada satisfactoriamente");
+		
+			} else {
+				JOptionPane.showMessageDialog(null, "La informaci�n no pudo ser borrada");
+			}
+		} catch (Exception ex) {
+			// TODO: handle exception
+			ex.printStackTrace();
+		}
 		
 	}
 
@@ -151,9 +168,9 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 
 			
 
-				JOptionPane.showMessageDialog(null, "Informaci�n almacenada satisfactoriamente");
+				JOptionPane.showMessageDialog(null, "Informaci�n borrada satisfactoriamente");
 			} else {
-				JOptionPane.showMessageDialog(null, "La informaci�n no pudo ser almacenada");
+				JOptionPane.showMessageDialog(null, "La informaci�n no pudo ser borrada");
 			}
 		} catch (Exception ex) {
 			// TODO: handle exception
