@@ -65,9 +65,9 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 			for (int i = 0; i < arrLista.size(); i++) {
 
-				pw.println((i + 1) + "," + arrLista.get(i).getDni() + "," + arrLista.get(i).getNombre() + ","
-						+ arrLista.get(i).getApellido() + "," + arrLista.get(i).getTelefono() + ","
-						+ arrLista.get(i).getNacionalidad());
+				pw.println((i + 1) + "," + arrLista.get(i).getDni().toLowerCase() + "," + arrLista.get(i).getNombre().toLowerCase() + ","
+						+ arrLista.get(i).getApellido().toLowerCase() + "," + arrLista.get(i).getTelefono() + ","
+						+ arrLista.get(i).getNacionalidad().toLowerCase());
 
 			}
 			
@@ -96,9 +96,9 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 			fichero = new FileWriter("conf/datos.txt",true);
 			pw = new PrintWriter(fichero);
 
-				pw.println((nAlumnos+1) + "," + alumno.getDni() + "," + alumno.getNombre() + ","
-						+ alumno.getApellido() + "," + alumno.getTelefono() + ","
-						+ alumno.getNacionalidad());
+				pw.println((nAlumnos+1) + "," + alumno.getDni().toLowerCase() + "," + alumno.getNombre().toLowerCase() + ","
+						+ alumno.getApellido().toLowerCase() + "," + alumno.getTelefono() + ","
+						+ alumno.getNacionalidad().toLowerCase());
 				nAlumnos++;
 				System.out.println(nAlumnos);
 			
