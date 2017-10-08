@@ -158,7 +158,17 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 		 * el alumno de insertar debe ser el actualizar
 		 * Creo que teniendo los metodos borarUno() e insertar() podemos reutilizarlos
 		 */
-		
+		for (int i = 0; i < list.size(); i++) {
+			int cod;
+			if(list.get(i).getDni()==dni){
+				cod = list.get(i).getCod();
+				list.remove(i);
+				Alumnos alumno = new Alumnos(cod,dni, nombre, apellidos, telefono, nacionalidad);
+				list.add(alumno);
+				
+			}
+		}
+		copiarTodos(list);
 	}
 
 
