@@ -17,6 +17,7 @@ public class Controlador {
  
 	public String tipoAcceso() {
 		String resp;
+		
 		String[] tipos = { "SQL", "Ficheros", };
 
 		return resp = (String) JOptionPane.showInputDialog(null, "Seleccione tipo de acceso a datos", "Tipo",
