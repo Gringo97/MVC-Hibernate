@@ -21,7 +21,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 	@Override
 	public ArrayList<Alumnos> recogerDatos() {
 		list = new ArrayList<Alumnos>();
-		file = new File("conf/datos.txt");
+		file = new File("bbdd/DatosTabla.txt");
 
 		BufferedReader reader = null;
 
