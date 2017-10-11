@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 28-09-2017 a las 13:17:46
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Host: 127.0.0.1
+-- Generation Time: Oct 11, 2017 at 11:13 AM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `alumnos_adat`
+-- Database: `alumnos_adat`
 --
 CREATE DATABASE IF NOT EXISTS `alumnos_adat` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `alumnos_adat`;
@@ -25,50 +27,84 @@ USE `alumnos_adat`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `alumnos`
+-- Table structure for table `alumnos`
 --
 
 DROP TABLE IF EXISTS `alumnos`;
-CREATE TABLE `alumnos` (
-  `cod` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `alumnos` (
+  `cod` int(11) NOT NULL AUTO_INCREMENT,
   `dni` varchar(9) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
   `telefono` int(9) NOT NULL,
-  `nacionalidad` varchar(15) NOT NULL
+  `nacionalidad` varchar(15) NOT NULL,
+  `titulacion` int(11) NOT NULL,
+  PRIMARY KEY (`cod`),
+  UNIQUE KEY `dni` (`dni`),
+  KEY `titulacion` (`titulacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cursos`
+--
+
+DROP TABLE IF EXISTS `cursos`;
+CREATE TABLE IF NOT EXISTS `cursos` (
+  `cod` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(40) NOT NULL,
+  PRIMARY KEY (`cod`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `alumnos`
---
-
-INSERT INTO `alumnos` (`cod`, `dni`, `nombre`, `apellido`, `telefono`, `nacionalidad`) VALUES
-(14, '1', '2', '3', 4, '5'),
-(15, '2', '3', '4', 5, '6'),
-(16, '3', '4', '5', 6, '7'),
-(17, '4', '5', '6', 7, '8'),
-(18, '5', '6', '7', 8, '9');
+-- --------------------------------------------------------
 
 --
--- Índices para tablas volcadas
+-- Table structure for table `titulaciones`
+--
+
+DROP TABLE IF EXISTS `titulaciones`;
+CREATE TABLE IF NOT EXISTS `titulaciones` (
+  `cod` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(40) NOT NULL,
+  PRIMARY KEY (`cod`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `titulaciones_cursos`
+--
+
+DROP TABLE IF EXISTS `titulaciones_cursos`;
+CREATE TABLE IF NOT EXISTS `titulaciones_cursos` (
+  `cod` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_curso` int(11) NOT NULL,
+  `cod_titulacion` int(11) NOT NULL,
+  PRIMARY KEY (`cod`),
+  UNIQUE KEY `cod_curso` (`cod_curso`,`cod_titulacion`),
+  KEY `cod_titulacion` (`cod_titulacion`),
+  KEY `cod` (`cod`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Indices de la tabla `alumnos`
+-- Constraints for table `alumnos`
 --
 ALTER TABLE `alumnos`
-  ADD PRIMARY KEY (`cod`),
-  ADD UNIQUE KEY `dni` (`dni`);
+  ADD CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`titulacion`) REFERENCES `titulaciones_cursos` (`cod`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- Constraints for table `titulaciones_cursos`
 --
+ALTER TABLE `titulaciones_cursos`
+  ADD CONSTRAINT `titulaciones_cursos_ibfk_1` FOREIGN KEY (`cod_titulacion`) REFERENCES `titulaciones` (`cod`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `titulaciones_cursos_ibfk_2` FOREIGN KEY (`cod_curso`) REFERENCES `cursos` (`cod`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
---
--- AUTO_INCREMENT de la tabla `alumnos`
---
-ALTER TABLE `alumnos`
-  MODIFY `cod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
