@@ -25,6 +25,7 @@ public class Controlador {
 
 	}
 
+	
 	public ModeloPrincipal getModeloPrincipal() {
 		return modeloPrincipal;
 	}
