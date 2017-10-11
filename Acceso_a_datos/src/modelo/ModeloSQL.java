@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import entidades.Alumnos;
+import entidades.Curso;
 import vista.VistaPrincipal;
 
 public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
@@ -220,6 +221,8 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 
 		}
 	}
+
+
 
 
 

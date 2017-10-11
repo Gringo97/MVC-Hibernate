@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 import entidades.Alumnos;
+import entidades.Curso;
 
 public interface Acceso_a_datos {
 	
@@ -11,6 +12,8 @@ public interface Acceso_a_datos {
 	public ArrayList<Alumnos> recogerDatos();
 	
 	public void insertar(Alumnos alumno);
+	
+
 	
 	public void borrarUno(int cod);
 	
