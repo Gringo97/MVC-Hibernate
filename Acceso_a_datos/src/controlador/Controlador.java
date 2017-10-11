@@ -14,7 +14,7 @@ public class Controlador {
 	private ModeloPrincipal modeloPrincipal;
 	private VistaPrincipal vistaPrincipal;
 
-
+ 
 	public String tipoAcceso() {
 		String resp;
 		String[] tipos = { "SQL", "Ficheros", };
