@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 import entidades.Alumnos;
+import entidades.Titulaciones;
 
 public interface Acceso_a_datos {
 	
@@ -20,6 +21,12 @@ public interface Acceso_a_datos {
 	
 	public void  copiarTodos(ArrayList<Alumnos> arrLista);
 
+	
+	/*
+	 * public void insertar(Titulaciones titulacion);
+	 * 
+	 * 
+	 */
 	
 	
 		
