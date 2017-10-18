@@ -1,7 +1,7 @@
 package entidades;
 
 public class Alumnos {
-	
+	 
 	private int cod;
 	private String dni;
 	private String nombre;

@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `titulaciones_cursos` (
 -- Constraints for dumped tables
 --
 
---
+-- 
 -- Constraints for table `alumnos`
 --
 ALTER TABLE `alumnos`
