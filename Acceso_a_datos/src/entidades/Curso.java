@@ -1,28 +1,29 @@
 package entidades;
 
 public class Curso {
-	private int codCurso;
-	private String nombreCurso;
+	private int cod;
+	private String nombre;
 
-	public Curso(int codCurso, String nombreCurso) {
-		this.codCurso = codCurso;
-		this.nombreCurso = nombreCurso;
+	public Curso(int cod, String nombre) {
+		this.cod = cod;
+		this.nombre = nombre;
 	}
 
-	public int getCodCurso() {
-		return codCurso;
+	public int getCod() {
+		return cod;
 	}
 
-	public void setCodCurso(int codCurso) {
-		this.codCurso = codCurso;
+	public void setCod(int cod) {
+		this.cod = cod;
 	}
 
-	public String getNombreCurso() {
-		return nombreCurso;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreCurso(String nombreCurso) {
-		this.nombreCurso = nombreCurso;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
+	
 }

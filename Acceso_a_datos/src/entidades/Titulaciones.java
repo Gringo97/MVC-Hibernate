@@ -1,29 +1,31 @@
 package entidades;
 
 public class Titulaciones {
-	private int codTitulacion;
-	private String nombreTitulacion;
+	private int cod;
+	private String nombre;
 
-	public Titulaciones(int codTitulacion, String nombreTitulacion) {
+	public Titulaciones(int cod, String nombre) {
 		super();
-		this.codTitulacion = codTitulacion;
-		this.nombreTitulacion = nombreTitulacion;
+		this.cod = cod;
+		this.nombre = nombre;
 	}
 
-	public int getCodTitulacion() {
-		return codTitulacion;
+	public int getCod() {
+		return cod;
 	}
 
-	public void setCodTitulacion(int codTitulacion) {
-		this.codTitulacion = codTitulacion;
+	public void setCod(int cod) {
+		this.cod = cod;
 	}
 
-	public String getNombreTitulacion() {
-		return nombreTitulacion;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombreTitulacion(String nombreTitulacion) {
-		this.nombreTitulacion = nombreTitulacion;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
+	
 
 }
