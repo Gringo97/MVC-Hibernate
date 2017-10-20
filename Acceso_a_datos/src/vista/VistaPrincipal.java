@@ -7,11 +7,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.lang.reflect.Array;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,12 +25,11 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.RowFilter;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import controlador.Controlador;
-
 import modelo.ModeloPrincipal;
 
 public class VistaPrincipal extends JFrame {
@@ -45,9 +47,11 @@ public class VistaPrincipal extends JFrame {
 	private JTextField txtApellidoMod;
 	private JTextField txtTelefonoMod;
 	private JTextField txtNacionalidadMod;
-	
+
 	private TableRowSorter trOrden;
 	private JTextField jtxtBuscarDni;
+	private JTextField txtImportar;
+	private JTextField txtfExportar;
 
 	/**
 	 * Launch the application.
@@ -124,7 +128,7 @@ public class VistaPrincipal extends JFrame {
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				controlador.actualizarAlumno();
 			}
 		});
@@ -134,30 +138,49 @@ public class VistaPrincipal extends JFrame {
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				controlador.eliminarUno();
 			}
 		});
-		
-		JButton btnNewButton = new JButton("Guardar en Fichero");
+
+		JButton btnNewButton = new JButton("Examinar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//controlador.guardaTabla();
+				// Creamos el objeto JFileChooser
+				JFileChooser fc = new JFileChooser();
+
+				// Indicamos lo que podemos seleccionar
+				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+				// Creamos el filtro
+
+				// Abrimos la ventana, guardamos la opcion seleccionada por el
+				// usuario
+				int seleccion = fc.showOpenDialog(contentPane);
+
+				// Si el usuario, pincha en aceptar
+				if (seleccion == JFileChooser.APPROVE_OPTION) {
+
+					// Seleccionamos el fichero
+					File fichero = fc.getSelectedFile();
+
+					// Ecribe la ruta del fichero seleccionado en el campo de
+					// texto
+					txtImportar.setText(fichero.getAbsolutePath());
+
+				}
+
 			}
 		});
-		
+
 		JButton btnEliminarTodos = new JButton("Eliminar Todos");
 		btnEliminarTodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				controlador.eliminarTodos();
 			}
 		});
-		
-		
-		
-		
-		
+
 		jtxtBuscarDni = new JTextField();
 		jtxtBuscarDni.setColumns(10);
 		jtxtBuscarDni.addKeyListener(new KeyAdapter() {
@@ -171,41 +194,98 @@ public class VistaPrincipal extends JFrame {
 					}
 
 					public void filtroDni() {
-		trOrden.setRowFilter(RowFilter.regexFilter(jtxtBuscarDni.getText(), 0));
+						trOrden.setRowFilter(RowFilter.regexFilter(jtxtBuscarDni.getText(), 0));
 
-	}
+					}
 				});
 				trOrden = new TableRowSorter(table.getModel());
 				table.setRowSorter(trOrden);
 			}
 		});
-		
+
 		JLabel lblBuscadorDni = new JLabel("Buscador DNI:");
-		
-		JButton btnSubirFicher = new JButton("Exportar a");
+
+		JButton btnSubirFicher = new JButton("Exportar");
 		btnSubirFicher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String tipoReceptor  = controlador.tipoAcceso();
+				String tipoReceptor = controlador.tipoAcceso();
 				controlador.tipoExportar(tipoReceptor);
 			}
 		});
+
+		txtImportar = new JTextField();
+		txtImportar.setColumns(10);
+
+		JLabel lblImportarDesde = new JLabel("Importar desde:");
+
+		JButton button = new JButton("Examinar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Creamos el objeto JFileChooser
+				JFileChooser fc = new JFileChooser();
+
+				// Indicamos lo que podemos seleccionar
+				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+				// Creamos el filtro
+
+				// Abrimos la ventana, guardamos la opcion seleccionada por el
+				// usuario
+				int seleccion = fc.showOpenDialog(contentPane);
+
+				// Si el usuario, pincha en aceptar
+				if (seleccion == JFileChooser.APPROVE_OPTION) {
+
+					// Seleccionamos el fichero
+					File fichero = fc.getSelectedFile();
+
+					// Ecribe la ruta del fichero seleccionado en el campo de
+					// texto
+					txtfExportar.setText(fichero.getAbsolutePath());
+
+				}
+
+			}
+		});
+
+		txtfExportar = new JTextField();
+		txtfExportar.setColumns(10);
+
+		JLabel lblExportarA = new JLabel("Exportar a:");
 		
-		
-		
+		JButton btnExportar = new JButton("Exportar");
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(23)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblBuscadorDni)
-							.addGap(24)
-							.addComponent(jtxtBuscarDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(lblImportarDesde, 0, 0, Short.MAX_VALUE)
+										.addGap(18)
+										.addComponent(txtImportar, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(lblBuscadorDni, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+										.addGap(24)
+										.addComponent(jtxtBuscarDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblExportarA, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(txtfExportar, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnSubirFicher))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 489, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(button, Alignment.TRAILING)
+								.addComponent(btnNewButton, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE))
+							.addGap(1)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnSubirFicher)
+								.addComponent(btnExportar, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+							.addGap(12)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
@@ -228,81 +308,90 @@ public class VistaPrincipal extends JFrame {
 									.addComponent(btnModificar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(txtNacionalidadMod, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 									.addComponent(btnEliminar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-									.addComponent(btnEliminarTodos, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))))
+									.addComponent(btnEliminarTodos, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 513, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblAadirAlumno)
-							.addGap(2)
-							.addComponent(txtDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(4)
-							.addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(3)
-							.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(4)
-							.addComponent(txtTelefono, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(5)
-							.addComponent(txtNacionalidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(8)
-							.addComponent(btnAadir)
-							.addGap(15)
-							.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(9)
-							.addComponent(lblModificarDatos, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addGap(9)
-							.addComponent(txtNombreMod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtApellidoMod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(5)
-							.addComponent(txtTelefonoMod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(5)
-							.addComponent(txtNacionalidadMod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(5)
-							.addComponent(btnModificar)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblAadirAlumno)
+									.addGap(2)
+									.addComponent(txtDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(4)
+									.addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(3)
+									.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(4)
+									.addComponent(txtTelefono, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(5)
+									.addComponent(txtNacionalidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(8)
+									.addComponent(btnAadir)
+									.addGap(15)
+									.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(9)
+									.addComponent(lblModificarDatos, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addGap(9)
+									.addComponent(txtNombreMod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtApellidoMod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(5)
+									.addComponent(txtTelefonoMod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(5)
+									.addComponent(txtNacionalidadMod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(5)
+									.addComponent(btnModificar))
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE))
 							.addGap(27)
 							.addComponent(btnEliminar)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnEliminarTodos)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(jtxtBuscarDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblBuscadorDni)
-						.addComponent(btnSubirFicher))
-					.addGap(12))
+							.addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnEliminarTodos)
+								.addComponent(txtImportar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnNewButton)
+								.addComponent(lblImportarDesde)
+								.addComponent(btnExportar))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(jtxtBuscarDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblBuscadorDni))
+							.addGap(12))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(button)
+								.addComponent(txtfExportar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblExportarA)
+								.addComponent(btnSubirFicher))
+							.addGap(79))))
 		);
 
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
-		    @Override
-		    public void mouseClicked(final MouseEvent e) {
-		       txtNombreMod.setText((String) table.getValueAt(table.getSelectedRow(), 2));
-		       txtApellidoMod.setText((String) table.getValueAt(table.getSelectedRow(), 3));
-		       txtTelefonoMod.setText((String) table.getValueAt(table.getSelectedRow(), 4));
-		       txtNacionalidadMod.setText((String) table.getValueAt(table.getSelectedRow(), 5));
-		       
-		    }
+			@Override
+			public void mouseClicked(final MouseEvent e) {
+				txtNombreMod.setText((String) table.getValueAt(table.getSelectedRow(), 2));
+				txtApellidoMod.setText((String) table.getValueAt(table.getSelectedRow(), 3));
+				txtTelefonoMod.setText((String) table.getValueAt(table.getSelectedRow(), 4));
+				txtNacionalidadMod.setText((String) table.getValueAt(table.getSelectedRow(), 5));
+
+			}
 		});
-		
-	
+
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
-	
+
 	public JTable getTabla() {
 		return table;
 	}
 
-
 	public void onLoadTable() {
-		//controlador.MostrarTabla();
+		// controlador.MostrarTabla();
 	}
 
 	public TableModel getTablaInfo() {
@@ -328,7 +417,7 @@ public class VistaPrincipal extends JFrame {
 	public String getTxtDni() {
 		return txtDni.getText();
 	}
-	
+
 	public String getTxtDniMod() {
 		return txtDni.getText();
 	}
@@ -381,15 +470,8 @@ public class VistaPrincipal extends JFrame {
 		this.txtNacionalidadMod = txtNacionalidadMod;
 	}
 
-
-
 	public void crearTabla() {
 		controlador.crearTabla();
-		
+
 	}
-
-
-
-	
-
 }

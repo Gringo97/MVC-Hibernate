@@ -14,11 +14,7 @@ public class Launch {
 		VistaPrincipal vistaPrincipal = new VistaPrincipal();
 		ModeloPrincipal modeloPrincipal = new ModeloPrincipal();
 		Controlador controlador = new Controlador();
-		
-		
-		
-		
-		
+
 		
 		//presentamos al controlador tanto al modelo principal como a la vista
 		controlador.setModeloPrincipal(modeloPrincipal);
@@ -38,7 +34,7 @@ public class Launch {
 		
 		 controlador.crearTabla();
 		
-		vistaPrincipal.setVisible(true);
+		 vistaPrincipal.setVisible(true);
 		
 		
 		
