@@ -16,19 +16,21 @@ import entidades.Titulaciones;
 public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 	ArrayList<Alumnos> listAumno;
-	File file;
+	File fAlumnos;
 	private int nAlumnos = 0;
 	ArrayList<Titulaciones> listTitulacion;
+	File fTitulaciones;
+	private int nTitulaciones = 0;
 
 	@Override
 	public ArrayList<Alumnos> recogerDatos() {
 		listAumno = new ArrayList<Alumnos>();
-		file = new File("bbdd/DatosTabla.txt");
+		fAlumnos = new File("bbdd/alumnos.txt");
 
 		BufferedReader reader = null;
 
 		try {
-			reader = new BufferedReader(new FileReader(file));
+			reader = new BufferedReader(new FileReader(fAlumnos));
 			String text = null;
 			Alumnos alumno = null;
 
@@ -62,7 +64,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 		FileWriter fichero = null;
 		PrintWriter pw = null;
 		try {
-			fichero = new FileWriter("conf/datos.txt");
+			fichero = new FileWriter("bbdd/alumnos.txt");
 			pw = new PrintWriter(fichero);
 
 			for (int i = 0; i < arrLista.size(); i++) {
@@ -95,7 +97,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 		FileWriter fichero = null;
 		PrintWriter pw = null;
 		try {
-			fichero = new FileWriter("conf/datos.txt",true);
+			fichero = new FileWriter("bbdd/alumnos.txt",true);
 			pw = new PrintWriter(fichero);
 
 				pw.println((nAlumnos+1) + "," + alumno.getDni().toLowerCase() + "," + alumno.getNombre().toLowerCase() + ","
@@ -142,7 +144,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 	public void borrarTodo() {
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter(file);
+			writer = new PrintWriter(fAlumnos);
 			writer.print("");
 			writer.close();
 
@@ -176,12 +178,12 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 	@Override
 	public ArrayList<Titulaciones> recogerDatosTitulacion() {
 		listTitulacion = new ArrayList<Titulaciones>();
-		file = new File("bbdd/Titulaciones.txt");
+		fTitulaciones = new File("bbdd/Titulaciones.txt");
 
 		BufferedReader reader = null;
 
 		try {
-			reader = new BufferedReader(new FileReader(file));
+			reader = new BufferedReader(new FileReader(fTitulaciones));
 			String text = null;
 			Titulaciones titulacion = null;
 
@@ -191,7 +193,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 				titulacion = new Titulaciones(Integer.parseInt(datosaux[0]),datosaux[1],datosaux[2]);
 				listTitulacion.add(titulacion);
-				nAlumnos = Integer.parseInt(datosaux[0]);
+				nTitulaciones = Integer.parseInt(datosaux[0]);
 
 			}
 		} catch (FileNotFoundException e) {
@@ -210,33 +212,102 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 	@Override
 	public void insertarTitulacion(Titulaciones titulacion) {
-		// TODO Auto-generated method stub
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+		try {
+			fichero = new FileWriter("bbdd/Titulaciones.txt",true);
+			pw = new PrintWriter(fichero);
+
+				pw.println((nTitulaciones+1) + "," + titulacion.getNombre().toLowerCase() +","+titulacion.getDescripcion().toLowerCase());
+				nTitulaciones++;
+				System.out.println("Numero Titulaciones: "+nTitulaciones);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			if (fichero != null) {
+				pw.close();
+				fichero.close();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	public void copiarTodosTitulacion(ArrayList<Titulaciones> arrLista) {
+		FileWriter fichero = null;
+		PrintWriter pw = null;
+		try {
+			fichero = new FileWriter("bbdd/Titulaciones.txt");
+			pw = new PrintWriter(fichero);
+
+			for (int i = 0; i < arrLista.size(); i++) {
+
+				pw.println((i + 1) + "," + arrLista.get(i).getCod() + "," + arrLista.get(i).getNombre().toLowerCase() + ","
+						+ arrLista.get(i).getDescripcion().toLowerCase());
+
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			if (fichero != null) {
+				pw.close();
+				fichero.close();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public void borrarUnoTitulacion(int cod) {
-		// TODO Auto-generated method stub
+		System.out.println("size----" + listTitulacion.size());
+		for (int i = 0; i < listTitulacion.size(); i++) {
+			if(listTitulacion.get(i).getCod()==cod){
+				listTitulacion.remove(i);
+			}
+		}
+		copiarTodosTitulacion(listTitulacion);
 		
 	}
 
 	@Override
 	public void borrarTodoTitulacion() {
-		// TODO Auto-generated method stub
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(fTitulaciones);
+			writer.print("");
+			writer.close();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public void actualizarTitulacion(Titulaciones titulacion) {
-		// TODO Auto-generated method stub
+		// borrarUno(cod);
+		// insertar(alumno);
+		borrarUnoTitulacion(titulacion.getCod());
+		insertarTitulacion(titulacion);
 		
 	}
 
-	@Override
-	public void copiarTodosTitulacion(ArrayList<Titulaciones> arrLista) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 
 
