@@ -11,16 +11,18 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import entidades.Alumnos;
+import entidades.Titulaciones;
 
 public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
-	ArrayList<Alumnos> list;
+	ArrayList<Alumnos> listAumno;
 	File file;
 	private int nAlumnos = 0;
+	ArrayList<Titulaciones> listTitulacion;
 
 	@Override
 	public ArrayList<Alumnos> recogerDatos() {
-		list = new ArrayList<Alumnos>();
+		listAumno = new ArrayList<Alumnos>();
 		file = new File("bbdd/DatosTabla.txt");
 
 		BufferedReader reader = null;
@@ -36,7 +38,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 				alumno = new Alumnos(Integer.parseInt(datosaux[0]), datosaux[1], datosaux[2], datosaux[3],
 						Integer.parseInt(datosaux[4]), datosaux[5]);
-				list.add(alumno);
+				listAumno.add(alumno);
 				nAlumnos = Integer.parseInt(datosaux[0]);
 
 			}
@@ -51,7 +53,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 			e.printStackTrace();
 		}
 
-		return list;
+		return listAumno;
 
 	}
 
@@ -127,13 +129,13 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 	@Override
 	public void borrarUno(int cod) {
 		//recogerDatos();
-		System.out.println("size----" + list.size());
-		for (int i = 0; i < list.size(); i++) {
-			if(list.get(i).getCod()==cod){
-				list.remove(i);
+		System.out.println("size----" + listAumno.size());
+		for (int i = 0; i < listAumno.size(); i++) {
+			if(listAumno.get(i).getCod()==cod){
+				listAumno.remove(i);
 			}
 		}
-		copiarTodos(list);
+		copiarTodos(listAumno);
 	}
 
 	@Override
@@ -158,18 +160,84 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 		 * el alumno de insertar debe ser el actualizar
 		 * Creo que teniendo los metodos borarUno() e insertar() podemos reutilizarlos
 		 */
-		for (int i = 0; i < list.size(); i++) {
+		for (int i = 0; i < listAumno.size(); i++) {
 			int cod;
-			if(list.get(i).getDni()==dni){
-				cod = list.get(i).getCod();
-				list.remove(i);
+			if(listAumno.get(i).getDni()==dni){
+				cod = listAumno.get(i).getCod();
+				listAumno.remove(i);
 				Alumnos alumno = new Alumnos(cod,dni, nombre, apellidos, telefono, nacionalidad);
-				list.add(alumno);
+				listAumno.add(alumno);
 				
 			}
 		}
-		copiarTodos(list);
+		copiarTodos(listAumno);
 	}
+
+	@Override
+	public ArrayList<Titulaciones> recogerDatosTitulacion() {
+		listTitulacion = new ArrayList<Titulaciones>();
+		file = new File("bbdd/Titulaciones.txt");
+
+		BufferedReader reader = null;
+
+		try {
+			reader = new BufferedReader(new FileReader(file));
+			String text = null;
+			Titulaciones titulacion = null;
+
+			while ((text = reader.readLine()) != null) {
+
+				String[] datosaux = text.split(",");
+
+				titulacion = new Titulaciones(Integer.parseInt(datosaux[0]),datosaux[1],datosaux[2]);
+				listTitulacion.add(titulacion);
+				nAlumnos = Integer.parseInt(datosaux[0]);
+
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return listTitulacion;
+	}
+
+	@Override
+	public void insertarTitulacion(Titulaciones titulacion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void borrarUnoTitulacion(int cod) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void borrarTodoTitulacion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actualizarTitulacion(Titulaciones titulacion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void copiarTodosTitulacion(ArrayList<Titulaciones> arrLista) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 	

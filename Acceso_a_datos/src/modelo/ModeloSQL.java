@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import entidades.Alumnos;
+import entidades.Titulaciones;
 import vista.VistaPrincipal;
 
 public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
@@ -220,6 +221,55 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 
 		}
 	}
+
+
+
+	@Override
+	public ArrayList<Titulaciones> recogerDatosTitulacion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void insertarTitulacion(Titulaciones titulacion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void borrarUnoTitulacion(int cod) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void borrarTodoTitulacion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void actualizarTitulacion(Titulaciones titulacion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void copiarTodosTitulacion(ArrayList<Titulaciones> arrLista) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 
