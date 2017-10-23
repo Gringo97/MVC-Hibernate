@@ -39,7 +39,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 				String[] datosaux = text.split(",");
 
 				alumno = new Alumnos(Integer.parseInt(datosaux[0]), datosaux[1], datosaux[2], datosaux[3],
-						Integer.parseInt(datosaux[4]), datosaux[5]);
+						Integer.parseInt(datosaux[4]), datosaux[5],datosaux[6]);
 				listAumno.add(alumno);
 				nAlumnos = Integer.parseInt(datosaux[0]);
 
@@ -154,14 +154,15 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 		}
 		
 	}
+	
 	@Override
-	public void actualizar(String dni,String nombre,String apellidos, int telefono,String nacionalidad) {
+	public void actualizar(Alumnos alumno) {
+		
+		 borrarUno(alumno.getCod());
+		 insertar(alumno);
+		
+		 
 		/*
-		 * borrarUno(cod);
-		 * insertar(alumno);
-		 * el alumno de insertar debe ser el actualizar
-		 * Creo que teniendo los metodos borarUno() e insertar() podemos reutilizarlos
-		 */
 		for (int i = 0; i < listAumno.size(); i++) {
 			int cod;
 			if(listAumno.get(i).getDni()==dni){
@@ -173,6 +174,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 			}
 		}
 		copiarTodos(listAumno);
+		*/
 	}
 
 	@Override

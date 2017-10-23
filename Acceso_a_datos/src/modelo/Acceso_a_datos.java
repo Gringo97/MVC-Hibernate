@@ -13,7 +13,7 @@ public interface Acceso_a_datos {
 	public void insertar(Alumnos alumno);
 	public void borrarUno(int cod);
 	public void borrarTodo();
-	public void actualizar(String dni, String nombre, String apellido, int telefono, String nacionalidad);
+	public void actualizar(Alumnos alumno);
 	public void copiarTodos(ArrayList<Alumnos> arrLista);
 
 	

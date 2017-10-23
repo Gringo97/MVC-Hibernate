@@ -78,8 +78,8 @@ public class ModeloPrincipal {
 		vistaPrincipal.crearTabla();
 		
 	}
-	public void actualizar(String dni, String nombre, String apellido, int telefono, String nacionalidad){
-		modeloDatos.actualizar(dni,nombre,apellido,telefono,nacionalidad);
+	public void actualizar(Alumnos alumno){
+		modeloDatos.actualizar(alumno);
 		vistaPrincipal.crearTabla();
 	}
 

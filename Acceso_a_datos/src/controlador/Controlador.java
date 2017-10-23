@@ -81,16 +81,17 @@ public class Controlador {
 	}
 	
 	public void actualizarAlumno(){
+		Alumnos alumno;
 		String dato=String.valueOf(vistaPrincipal.getTabla().getValueAt(vistaPrincipal.getTabla().getSelectedRow(),1));
-		modeloPrincipal.actualizar(dato,vistaPrincipal.getTxtNombreMod(),vistaPrincipal.getTxtApellidoMod(),Integer.parseInt(vistaPrincipal.getTxtTelefonoMod()),vistaPrincipal.getTxtNacionalidadMod());
-		
+		alumno = new Alumnos(dato,vistaPrincipal.getTxtNombreMod(),vistaPrincipal.getTxtApellidoMod(),Integer.parseInt(vistaPrincipal.getTxtTelefonoMod()),vistaPrincipal.getTxtNacionalidadMod(),codTitulacion);
+		modeloPrincipal.actualizar(alumno);
 	}
 	
 	
 
 	public void nuevoAlumno() {
 		Alumnos alumno;
-		alumno = new Alumnos(vistaPrincipal.getTxtDni(),vistaPrincipal.getTxtNombre(),vistaPrincipal.getTxtApellido(),Integer.parseInt(vistaPrincipal.getTxtTelefono()),vistaPrincipal.getTxtNacionalidad());
+		alumno = new Alumnos(vistaPrincipal.getTxtDni(),vistaPrincipal.getTxtNombre(),vistaPrincipal.getTxtApellido(),Integer.parseInt(vistaPrincipal.getTxtTelefono()),vistaPrincipal.getTxtNacionalidad(),codTitulacion);
 		
 		modeloPrincipal.anadirAlumno(alumno);
 	}

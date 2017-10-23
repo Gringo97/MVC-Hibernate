@@ -93,7 +93,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 			Alumnos alumno;
 			while (rs.next()) {
 				alumno = new Alumnos(rs.getInt("cod"), rs.getString("DNI"), rs.getString("NOMBRE"),
-						rs.getString("APELLIDO"), rs.getInt("TELEFONO"), rs.getString("NACIONALIDAD"));
+						rs.getString("APELLIDO"), rs.getInt("TELEFONO"), rs.getString("NACIONALIDAD"),rs.getString("Titulacion"));
 				arrAlumnos.add(alumno);
 			}
 			connection.close();
@@ -195,11 +195,11 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 		
 	}
 	@Override
-	public void actualizar(String dni,String nombre,String apellidos, int telefono,String nacionalidad) {
+	public void actualizar(Alumnos alumno) {
 		Connection con = getConnection();
 		int r = 0;
 
-		String query = "UPDATE alumnos SET NOMBRE = ?, APELLIDO = ?,  TELEFONO = ?, NACIONALIDAD = ? WHERE alumnos.DNI = '"+ dni+"'";
+		String query = "UPDATE alumnos SET NOMBRE = ?, APELLIDO = ?,  TELEFONO = ?, NACIONALIDAD = ? WHERE alumnos.DNI = '"+ alumno.getDni()+"'";
 		
 		
 		PreparedStatement pstmt;
@@ -207,10 +207,11 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 
 		try {
 			pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, nombre.toLowerCase());
-			pstmt.setString(2, apellidos.toLowerCase());
-			pstmt.setInt(3, telefono);
-			pstmt.setString(4, nacionalidad.toLowerCase());
+			pstmt.setString(1, alumno.getNombre().toLowerCase());
+			pstmt.setString(2, alumno.getApellido().toLowerCase());
+			pstmt.setInt(3, alumno.getTelefono());
+			pstmt.setString(4, alumno.getNacionalidad().toLowerCase());
+			pstmt.setString(4, alumno.getTitulacion().toLowerCase());
 
 			
 			r = pstmt.executeUpdate();
