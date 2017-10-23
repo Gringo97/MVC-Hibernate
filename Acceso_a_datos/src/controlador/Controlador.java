@@ -65,6 +65,7 @@ public class Controlador {
 		model.addColumn("Apellido");
 		model.addColumn("Telefono");
 		model.addColumn("Nacionalidad");
+		model.addColumn("Curso");
 		for (int i = 0; i < arrAlumnos.size(); i++) {
 			model.addRow(new String[] { String.valueOf(arrAlumnos.get(i).getCod()), arrAlumnos.get(i).getDni(),
 					arrAlumnos.get(i).getNombre(), arrAlumnos.get(i).getApellido(),
