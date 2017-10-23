@@ -17,9 +17,10 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 	ArrayList<Alumnos> listAumno;
 	File fAlumnos;
-	private int nAlumnos = 0;
+	private int nAlumnos = 1;
 	ArrayList<Titulaciones> listTitulacion;
 	File fTitulaciones;
+	private int nTitulaciones = 1;
 
 	@Override
 	public ArrayList<Alumnos> recogerDatos() {
@@ -158,29 +159,24 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 	@Override
 	public void actualizar(Alumnos alumno) {
 		
-		 borrarUno(alumno.getCod());
-		 insertar(alumno);
 		
-		 
-		/*
 		for (int i = 0; i < listAumno.size(); i++) {
 			int cod;
-			if(listAumno.get(i).getDni()==dni){
+			if(listAumno.get(i).getDni()==alumno.getDni()){
 				cod = listAumno.get(i).getCod();
 				listAumno.remove(i);
-				Alumnos alumno = new Alumnos(cod,dni, nombre, apellidos, telefono, nacionalidad);
 				listAumno.add(alumno);
 				
 			}
 		}
 		copiarTodos(listAumno);
-		*/
+		
 	}
 
 	@Override
 	public ArrayList<Titulaciones> recogerDatosTitulacion() {
 		listTitulacion = new ArrayList<Titulaciones>();
-		fTitulaciones = new File("bbdd/Titulaciones.txt");
+		fTitulaciones = new File("bbdd/titulaciones.txt");
 
 		BufferedReader reader = null;
 
@@ -220,7 +216,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 			fichero = new FileWriter("bbdd/Titulaciones.txt",true);
 			pw = new PrintWriter(fichero);
 
-				pw.println(titulacion.getCod() + "," + titulacion.getNombre().toLowerCase() +","+titulacion.getDescripcion().toLowerCase());
+				pw.println(nTitulaciones + "," + titulacion.getNombre().toLowerCase() +","+titulacion.getDescripcion().toLowerCase());
 
 			
 		} catch (IOException e) {
