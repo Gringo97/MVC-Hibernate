@@ -22,7 +22,7 @@ public class Alumnos {
 		this.titulacion = titulacion;
 	}
 
-	public Alumnos(String dni, String nombre, String apellido, int telefono, String nacionalidad, String curso) {
+	public Alumnos(String dni, String nombre, String apellido, int telefono, String nacionalidad, int titulacion) {
 
 		this.dni = dni;
 		this.nombre = nombre;

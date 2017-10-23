@@ -88,7 +88,7 @@ public class Controlador {
 	public void actualizarAlumno(){
 		Alumnos alumno;
 		String dato=String.valueOf(vistaPrincipal.getTabla().getValueAt(vistaPrincipal.getTabla().getSelectedRow(),1));
-		alumno = new Alumnos(dato,vistaPrincipal.getTxtNombreMod(),vistaPrincipal.getTxtApellidoMod(),Integer.parseInt(vistaPrincipal.getTxtTelefonoMod()),vistaPrincipal.getTxtNacionalidadMod(),vistaPrincipal.getTxtTitulacionMod());
+		alumno = new Alumnos(dato,vistaPrincipal.getTxtNombreMod(),vistaPrincipal.getTxtApellidoMod(),Integer.parseInt(vistaPrincipal.getTxtTelefonoMod()),vistaPrincipal.getTxtNacionalidadMod(),Integer.parseInt(vistaPrincipal.getTxtTitulacionMod()));
 		modeloPrincipal.actualizar(alumno);
 	}
 	
