@@ -73,7 +73,7 @@ public class Controlador {
 					arrAlumnos.get(i).getApellido(),
 					String.valueOf(arrAlumnos.get(i).getTelefono()),
 					arrAlumnos.get(i).getNacionalidad(),
-					arrAlumnos.get(i).getTitulacion()
+					 String.valueOf(arrAlumnos.get(i).getTitulacion())
 			});
 			
 			this.vistaPrincipal.getTable().setModel(model);
@@ -96,7 +96,7 @@ public class Controlador {
 
 	public void nuevoAlumno() {
 		Alumnos alumno;
-		alumno = new Alumnos(vistaPrincipal.getTxtDni(),vistaPrincipal.getTxtNombre(),vistaPrincipal.getTxtApellido(),Integer.parseInt(vistaPrincipal.getTxtTelefono()),vistaPrincipal.getTxtNacionalidad(),vistaPrincipal.getTxtTitulacion());
+		alumno = new Alumnos(vistaPrincipal.getTxtDni(),vistaPrincipal.getTxtNombre(),vistaPrincipal.getTxtApellido(),Integer.parseInt(vistaPrincipal.getTxtTelefono()),vistaPrincipal.getTxtNacionalidad(),Integer.parseInt(vistaPrincipal.getTxtTitulacion()));
 		
 		modeloPrincipal.anadirAlumno(alumno);
 	}

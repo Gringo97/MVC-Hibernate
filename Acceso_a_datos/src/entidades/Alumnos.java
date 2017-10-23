@@ -8,10 +8,10 @@ public class Alumnos {
 	private String apellido;
 	private int telefono;
 	private String nacionalidad;
-	private String titulacion;
+	private int titulacion;
 
 	public Alumnos(int cod, String dni, String nombre, String apellido, int telefono, String nacionalidad,
-			String titulacion) {
+			int titulacion) {
 
 		this.cod = cod;
 		this.dni = dni;
@@ -32,11 +32,11 @@ public class Alumnos {
 		this.titulacion = titulacion;
 	}
 
-	public String getTitulacion() {
+	public int getTitulacion() {
 		return titulacion;
 	}
 
-	public void setTitulacion(String titulacion) {
+	public void setTitulacion(int titulacion) {
 		this.titulacion = titulacion;
 	}
 

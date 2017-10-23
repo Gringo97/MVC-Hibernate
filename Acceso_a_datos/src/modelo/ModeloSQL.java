@@ -93,7 +93,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 			Alumnos alumno;
 			while (rs.next()) {
 				alumno = new Alumnos(rs.getInt("cod"), rs.getString("DNI"), rs.getString("NOMBRE"),
-						rs.getString("APELLIDO"), rs.getInt("TELEFONO"), rs.getString("NACIONALIDAD"),rs.getString("Titulacion"));
+						rs.getString("APELLIDO"), rs.getInt("TELEFONO"), rs.getString("NACIONALIDAD"),rs.getInt("Titulacion"));
 				arrAlumnos.add(alumno);
 			}
 			connection.close();
@@ -119,7 +119,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 			ps.setString(3, alumno.getApellido().toLowerCase());
 			ps.setInt(4, alumno.getTelefono());
 			ps.setString(5, alumno.getNacionalidad().toLowerCase());
-			ps.setString(6, alumno.getTitulacion().toLowerCase());
+			ps.setInt(6, alumno.getTitulacion());
 
 			if (ps.executeUpdate() == 1) {
 
@@ -212,7 +212,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 			pstmt.setString(2, alumno.getApellido().toLowerCase());
 			pstmt.setInt(3, alumno.getTelefono());
 			pstmt.setString(4, alumno.getNacionalidad().toLowerCase());
-			pstmt.setString(5, alumno.getTitulacion().toLowerCase());
+			pstmt.setInt(5, alumno.getTitulacion());
 
 			
 			r = pstmt.executeUpdate();

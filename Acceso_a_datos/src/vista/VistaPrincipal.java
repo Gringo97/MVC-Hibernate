@@ -530,9 +530,6 @@ public class VistaPrincipal extends JFrame {
 		return txtTitulacion.getText();
 	}
 
-	public void setTxtTitulacion(JTextField txtTitulacion) {
-		this.txtTitulacion = txtTitulacion;
-	}
 
 	public String getTxtNombreMod() {
 		return txtNombreMod.getText();

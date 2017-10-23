@@ -38,7 +38,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 				String[] datosaux = text.split(",");
 
 				alumno = new Alumnos(Integer.parseInt(datosaux[0]), datosaux[1], datosaux[2], datosaux[3],
-						Integer.parseInt(datosaux[4]), datosaux[5],datosaux[6]);
+						Integer.parseInt(datosaux[4]), datosaux[5],Integer.parseInt(datosaux[6]));
 				listAumno.add(alumno);
 				nAlumnos = Integer.parseInt(datosaux[0]);
 
@@ -70,7 +70,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 				pw.println((i + 1) + "," + arrLista.get(i).getDni().toLowerCase() + "," + arrLista.get(i).getNombre().toLowerCase() + ","
 						+ arrLista.get(i).getApellido().toLowerCase() + "," + arrLista.get(i).getTelefono() + ","
-						+ arrLista.get(i).getNacionalidad().toLowerCase() + "," + arrLista.get(i).getTitulacion().toLowerCase());
+						+ arrLista.get(i).getNacionalidad().toLowerCase() + "," + arrLista.get(i).getTitulacion());
 
 			}
 			
@@ -102,7 +102,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 				pw.println((nAlumnos+1) + "," + alumno.getDni().toLowerCase() + "," + alumno.getNombre().toLowerCase() + ","
 						+ alumno.getApellido().toLowerCase() + "," + alumno.getTelefono() + ","
 						+ alumno.getNacionalidad().toLowerCase() + ","
-								+ alumno.getTitulacion().toLowerCase());
+								+ alumno.getTitulacion());
 				nAlumnos++;
 				System.out.println(nAlumnos);
 			
