@@ -287,16 +287,25 @@ public class VistaPrincipal extends JFrame {
 			}
 		});
 		
+	//ASI NO!
+//		textField = new JTextField();
+//		txtTitulacion = new TextPrompt("Titulacion", textField);
+//		txtTitulacion.setColumns(10);
+//		placeholderCurso.changeAlpha(0.50f);
+//		placeholderCurso.changeStyle(Font.ITALIC);
+		
 	
+		
 		textField = new JTextField();
-		txtTitulacion = new TextPrompt("Curso", textField);
-		txtTitulacion.setText("Titulacion");
+		TextPrompt placeholderTitulacion = new TextPrompt("Titulacion", textField);
 		textField.setColumns(10);
-		placeholderCurso.changeAlpha(0.50f);
-		placeholderCurso.changeStyle(Font.ITALIC);
+		placeholderTitulacion.changeAlpha(0.50f);
+		placeholderTitulacion.changeStyle(Font.ITALIC);
 		
 		txtTitulacionMod = new JTextField();
 		txtTitulacionMod.setColumns(10);
+		
+		
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
