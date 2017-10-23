@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import entidades.Alumnos;
+import entidades.Titulaciones;
 import modelo.ModeloPrincipal;
 import vista.VistaPrincipal;
 
@@ -102,6 +103,16 @@ public class Controlador {
 		int cod = Integer.parseInt((String) vistaPrincipal.getTabla().getValueAt(vistaPrincipal.getTabla().getSelectedRow(),0));
 		System.out.println("cod de tabl======>" + cod);
 		modeloPrincipal.borrarUno(cod);
+		
+	}
+
+	public void nuevoCurso() {
+		// TODO Auto-generated method stub
+		Titulaciones curso;
+		curso = new Titulaciones(vistaPrincipal.getTxtNombreCurso(),vistaPrincipal.getTxtDescripcionCurso());
+		
+		modeloPrincipal.anadirCurso(curso);
+		
 		
 	}
 

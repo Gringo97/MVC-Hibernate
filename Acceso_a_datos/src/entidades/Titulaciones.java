@@ -12,6 +12,12 @@ public class Titulaciones {
 		this.descripcion = descripcion;
 	}
 
+	public Titulaciones( String nombre,String descripcion) {
+		super();
+		
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
 	public int getCod() {
 		return cod;
 	}

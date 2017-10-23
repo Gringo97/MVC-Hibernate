@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JTextField;
 
 import entidades.Alumnos;
+import entidades.Titulaciones;
 import vista.VistaPrincipal;
 
 public class ModeloPrincipal {
@@ -90,6 +91,13 @@ public class ModeloPrincipal {
 	public void borrarUno(int cod) {
 		modeloDatos.borrarUno(cod);
 		vistaPrincipal.crearTabla();
+		
+	}
+
+	public void anadirCurso(Titulaciones curso) {
+		// TODO Auto-generated method stub
+		modeloDatos.insertarTitulacion(curso);
+		
 		
 	}
 	
