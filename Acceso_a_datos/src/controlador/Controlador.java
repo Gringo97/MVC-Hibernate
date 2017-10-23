@@ -65,11 +65,16 @@ public class Controlador {
 		model.addColumn("Apellido");
 		model.addColumn("Telefono");
 		model.addColumn("Nacionalidad");
-		model.addColumn("Curso");
+		model.addColumn("Titulacion");
 		for (int i = 0; i < arrAlumnos.size(); i++) {
-			model.addRow(new String[] { String.valueOf(arrAlumnos.get(i).getCod()), arrAlumnos.get(i).getDni(),
-					arrAlumnos.get(i).getNombre(), arrAlumnos.get(i).getApellido(),
-					String.valueOf(arrAlumnos.get(i).getTelefono()), arrAlumnos.get(i).getNacionalidad() });
+			model.addRow(new String[] { String.valueOf(arrAlumnos.get(i).getCod()),
+					arrAlumnos.get(i).getDni(),
+					arrAlumnos.get(i).getNombre(),
+					arrAlumnos.get(i).getApellido(),
+					String.valueOf(arrAlumnos.get(i).getTelefono()),
+					arrAlumnos.get(i).getNacionalidad(),
+					arrAlumnos.get(i).getTitulacion()
+			});
 			
 			this.vistaPrincipal.getTable().setModel(model);
 		}
@@ -83,7 +88,7 @@ public class Controlador {
 	public void actualizarAlumno(){
 		Alumnos alumno;
 		String dato=String.valueOf(vistaPrincipal.getTabla().getValueAt(vistaPrincipal.getTabla().getSelectedRow(),1));
-		alumno = new Alumnos(dato,vistaPrincipal.getTxtNombreMod(),vistaPrincipal.getTxtApellidoMod(),Integer.parseInt(vistaPrincipal.getTxtTelefonoMod()),vistaPrincipal.getTxtNacionalidadMod(),codTitulacion);
+		alumno = new Alumnos(dato,vistaPrincipal.getTxtNombreMod(),vistaPrincipal.getTxtApellidoMod(),Integer.parseInt(vistaPrincipal.getTxtTelefonoMod()),vistaPrincipal.getTxtNacionalidadMod(),vistaPrincipal.getTxtTitulacionMod());
 		modeloPrincipal.actualizar(alumno);
 	}
 	
@@ -91,7 +96,7 @@ public class Controlador {
 
 	public void nuevoAlumno() {
 		Alumnos alumno;
-		alumno = new Alumnos(vistaPrincipal.getTxtDni(),vistaPrincipal.getTxtNombre(),vistaPrincipal.getTxtApellido(),Integer.parseInt(vistaPrincipal.getTxtTelefono()),vistaPrincipal.getTxtNacionalidad(),codTitulacion);
+		alumno = new Alumnos(vistaPrincipal.getTxtDni(),vistaPrincipal.getTxtNombre(),vistaPrincipal.getTxtApellido(),Integer.parseInt(vistaPrincipal.getTxtTelefono()),vistaPrincipal.getTxtNacionalidad(),vistaPrincipal.getTxtTitulacion());
 		
 		modeloPrincipal.anadirAlumno(alumno);
 	}
