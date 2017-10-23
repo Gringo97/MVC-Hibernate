@@ -111,7 +111,7 @@ public class ModeloSQL extends ModeloPrincipal implements Acceso_a_datos{
 		Connection con = getConnection();
 		PreparedStatement ps;
 
-		String query = "INSERT INTO `alumnos` (`dni`, `nombre`, `apellido`, `telefono`, `nacionalidad`, `titulacion`) VALUES (?,?,?,?,?.?)";
+		String query = "INSERT INTO `alumnos` (`dni`, `nombre`, `apellido`, `telefono`, `nacionalidad`, `titulacion`) VALUES (?,?,?,?,?,?)";
 		try {
 			ps = con.prepareStatement(query);
 			ps.setString(1, alumno.getDni().toLowerCase());
