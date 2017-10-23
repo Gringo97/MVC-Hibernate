@@ -54,8 +54,8 @@ public class VistaPrincipal extends JFrame {
 	private JTextField txtfExportar;
 	private JTextField txtNombreCurso;
 	private JTextField txtDescripcionCurso;
-	private JTextField textField;
-	private TextPrompt txtTitulacion;
+	private JTextField txtTitulacion;
+	//private TextPrompt txtTitulacion;
 	private JTextField txtTitulacionMod;
 
 	/**
@@ -296,9 +296,9 @@ public class VistaPrincipal extends JFrame {
 		
 	
 		
-		textField = new JTextField();
-		TextPrompt placeholderTitulacion = new TextPrompt("Titulacion", textField);
-		textField.setColumns(10);
+		txtTitulacion = new JTextField();
+		TextPrompt placeholderTitulacion = new TextPrompt("Titulacion", txtTitulacion);
+		txtTitulacion.setColumns(10);
 		placeholderTitulacion.changeAlpha(0.50f);
 		placeholderTitulacion.changeStyle(Font.ITALIC);
 		
@@ -382,7 +382,7 @@ public class VistaPrincipal extends JFrame {
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 											.addComponent(btnEliminar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 											.addComponent(btnEliminarTodos, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))))
-								.addComponent(textField, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtTitulacion, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnAnadirAlumno, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
@@ -404,7 +404,7 @@ public class VistaPrincipal extends JFrame {
 							.addGap(5)
 							.addComponent(phNacionalidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(txtTitulacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnAnadirAlumno)
@@ -466,7 +466,7 @@ public class VistaPrincipal extends JFrame {
 				txtApellidoMod.setText((String) table.getValueAt(table.getSelectedRow(), 3));
 				txtTelefonoMod.setText((String) table.getValueAt(table.getSelectedRow(), 4));
 				txtNacionalidadMod.setText((String) table.getValueAt(table.getSelectedRow(), 5));
-				txtTitulacion.setText((String) table.getValueAt(table.getSelectedRow(), 6));
+				txtTitulacionMod.setText((String) table.getValueAt(table.getSelectedRow(), 6));
 			}
 		});
 
@@ -530,7 +530,7 @@ public class VistaPrincipal extends JFrame {
 		return txtTitulacion.getText();
 	}
 
-	public void setTxtTitulacion(TextPrompt txtTitulacion) {
+	public void setTxtTitulacion(JTextField txtTitulacion) {
 		this.txtTitulacion = txtTitulacion;
 	}
 
@@ -594,6 +594,8 @@ public class VistaPrincipal extends JFrame {
 	public void setTxtTitulacionMod(JTextField txtTitulacionMod) {
 		this.txtTitulacionMod = txtTitulacionMod;
 	}
+
+	
 
 	
 }

@@ -20,7 +20,6 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 	private int nAlumnos = 0;
 	ArrayList<Titulaciones> listTitulacion;
 	File fTitulaciones;
-	private int nTitulaciones = 0;
 
 	@Override
 	public ArrayList<Alumnos> recogerDatos() {
@@ -71,7 +70,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 				pw.println((i + 1) + "," + arrLista.get(i).getDni().toLowerCase() + "," + arrLista.get(i).getNombre().toLowerCase() + ","
 						+ arrLista.get(i).getApellido().toLowerCase() + "," + arrLista.get(i).getTelefono() + ","
-						+ arrLista.get(i).getNacionalidad().toLowerCase());
+						+ arrLista.get(i).getNacionalidad().toLowerCase() + "," + arrLista.get(i).getTitulacion().toLowerCase());
 
 			}
 			
@@ -102,7 +101,8 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 				pw.println((nAlumnos+1) + "," + alumno.getDni().toLowerCase() + "," + alumno.getNombre().toLowerCase() + ","
 						+ alumno.getApellido().toLowerCase() + "," + alumno.getTelefono() + ","
-						+ alumno.getNacionalidad().toLowerCase());
+						+ alumno.getNacionalidad().toLowerCase() + ","
+								+ alumno.getTitulacion().toLowerCase());
 				nAlumnos++;
 				System.out.println(nAlumnos);
 			
@@ -195,7 +195,7 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 
 				titulacion = new Titulaciones(Integer.parseInt(datosaux[0]),datosaux[1],datosaux[2]);
 				listTitulacion.add(titulacion);
-				nTitulaciones = Integer.parseInt(datosaux[0]);
+				
 
 			}
 		} catch (FileNotFoundException e) {
@@ -220,9 +220,8 @@ public class ModeloFicheros extends ModeloPrincipal implements Acceso_a_datos {
 			fichero = new FileWriter("bbdd/Titulaciones.txt",true);
 			pw = new PrintWriter(fichero);
 
-				pw.println((nTitulaciones+1) + "," + titulacion.getNombre().toLowerCase() +","+titulacion.getDescripcion().toLowerCase());
-				nTitulaciones++;
-				System.out.println("Numero Titulaciones: "+nTitulaciones);
+				pw.println(titulacion.getCod() + "," + titulacion.getNombre().toLowerCase() +","+titulacion.getDescripcion().toLowerCase());
+
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
