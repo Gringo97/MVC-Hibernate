@@ -1,17 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 11, 2017 at 11:13 AM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.8
+-- Servidor: localhost
+-- Tiempo de generación: 23-10-2017 a las 18:23:25
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -20,91 +17,94 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `alumnos_adat`
+-- Base de datos: `alumnos_adat`
 --
-CREATE DATABASE IF NOT EXISTS `alumnos_adat` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `alumnos_adat`;
-
+DROP DATABASE if EXISTS alumnos_adat;
+CREATE DATABASE alumnos_adat;
+USE alumnos_adat;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alumnos`
+-- Estructura de tabla para la tabla `alumnos`
 --
 
-DROP TABLE IF EXISTS `alumnos`;
-CREATE TABLE IF NOT EXISTS `alumnos` (
-  `cod` int(11) NOT NULL AUTO_INCREMENT,
-  `dni` varchar(9) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `apellido` varchar(20) NOT NULL,
+CREATE TABLE `alumnos` (
+  `cod` int(11) NOT NULL,
+  `dni` varchar(64) NOT NULL,
+  `nombre` varchar(64) NOT NULL,
+  `apellido` varchar(64) NOT NULL,
   `telefono` int(9) NOT NULL,
-  `nacionalidad` varchar(15) NOT NULL,
-  `titulacion` int(11) NOT NULL,
-  PRIMARY KEY (`cod`),
-  UNIQUE KEY `dni` (`dni`),
-  KEY `titulacion` (`titulacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cursos`
---
-
-DROP TABLE IF EXISTS `cursos`;
-CREATE TABLE IF NOT EXISTS `cursos` (
-  `cod` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(40) NOT NULL,
-  PRIMARY KEY (`cod`)
+  `nacionalidad` varchar(64) NOT NULL,
+  `titulacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`cod`, `dni`, `nombre`, `apellido`, `telefono`, `nacionalidad`, `titulacion`) VALUES
+(5, '123456', 'patricia', 'palaciosaaaa', 887757576, 'españa', 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `titulaciones`
+-- Estructura de tabla para la tabla `titulaciones`
 --
 
-DROP TABLE IF EXISTS `titulaciones`;
-CREATE TABLE IF NOT EXISTS `titulaciones` (
-  `cod` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(40) NOT NULL,
-  PRIMARY KEY (`cod`)
+CREATE TABLE `titulaciones` (
+  `cod` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `titulaciones_cursos`
+-- Volcado de datos para la tabla `titulaciones`
 --
 
-DROP TABLE IF EXISTS `titulaciones_cursos`;
-CREATE TABLE IF NOT EXISTS `titulaciones_cursos` (
-  `cod` int(11) NOT NULL AUTO_INCREMENT,
-  `cod_curso` int(11) NOT NULL,
-  `cod_titulacion` int(11) NOT NULL,
-  PRIMARY KEY (`cod`),
-  UNIQUE KEY `cod_curso` (`cod_curso`,`cod_titulacion`),
-  KEY `cod_titulacion` (`cod_titulacion`),
-  KEY `cod` (`cod`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+INSERT INTO `titulaciones` (`cod`, `nombre`, `descripcion`) VALUES
+(1, '1DAMP', 'wiiii');
 
 --
--- Constraints for dumped tables
+-- Índices para tablas volcadas
 --
 
--- 
--- Constraints for table `alumnos`
+--
+-- Indices de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  ADD CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`titulacion`) REFERENCES `titulaciones_cursos` (`cod`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD PRIMARY KEY (`cod`),
+  ADD UNIQUE KEY `dni` (`dni`),
+  ADD KEY `titulacion` (`titulacion`);
 
 --
--- Constraints for table `titulaciones_cursos`
+-- Indices de la tabla `titulaciones`
 --
-ALTER TABLE `titulaciones_cursos`
-  ADD CONSTRAINT `titulaciones_cursos_ibfk_1` FOREIGN KEY (`cod_titulacion`) REFERENCES `titulaciones` (`cod`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `titulaciones_cursos_ibfk_2` FOREIGN KEY (`cod_curso`) REFERENCES `cursos` (`cod`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+ALTER TABLE `titulaciones`
+  ADD PRIMARY KEY (`cod`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `alumnos`
+--
+ALTER TABLE `alumnos`
+  MODIFY `cod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `titulaciones`
+--
+ALTER TABLE `titulaciones`
+  MODIFY `cod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `alumnos`
+--
+ALTER TABLE `alumnos`
+  ADD CONSTRAINT `alumnos_ibfk_1` FOREIGN KEY (`titulacion`) REFERENCES `titulaciones` (`cod`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
